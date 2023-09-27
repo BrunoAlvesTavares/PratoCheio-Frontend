@@ -5,6 +5,10 @@ import Menu from './components/menu/menu';
 import UserForm from './pages/Users/usersForm';
 import LoginPage from './pages/Login/login';
 import Logout from './pages/Logout/logout';
+import { InstitutionsList } from './pages/Institutions/institutionsList';
+import InstitutionsForm from './pages/Institutions/institutionsForm';
+import InstitutionsMessage from './pages/Institutions/institutionsMessage';
+import UserCreatedForm from './pages/Users/userCreated';
 
 const Layout = () => {
   return (
@@ -14,7 +18,12 @@ const Layout = () => {
         <Route path="/logout" element={<Logout />} />
         <Route path="/users" element={<UsersList />} />
         <Route path="/users/new" element={<FormUserMenu />} />
+        <Route path="/users/newUser" element={<UserCreatedForm />} />
         <Route path="/users/:id/edit" element={<FormUserMenu />} />
+        <Route path="/institutions" element={<InstitutionsList/>} />
+        <Route path="/institutions/new" element={<FormInstitutionsMenu />} />
+        <Route path="/institutions/:id/edit" element={<FormInstitutionsMenu />} />
+        <Route path="/institutions/:id/message" element={<FormMessageMenu />} />
       </Routes>
     </Router>
   );
@@ -25,6 +34,24 @@ const FormUserMenu = () => {
     <>
       <Menu />
       <UserForm />
+    </>
+  );
+};
+
+const FormInstitutionsMenu = () => {
+  return (
+    <>
+      <Menu />
+      <InstitutionsForm />
+    </>
+  );
+};
+
+const FormMessageMenu = () => {
+  return (
+    <>
+      <Menu />
+      <InstitutionsMessage />
     </>
   );
 };

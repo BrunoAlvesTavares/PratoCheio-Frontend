@@ -11,7 +11,6 @@ function UserCombo({ onUserChanged, disabled, multiple = false }) {
     setLoading(true);
     api.get('/users').then(response => {
       setUsers(response.data);
-      console.log(response.data)
     }).finally(() => {
       setLoading(false);
     });

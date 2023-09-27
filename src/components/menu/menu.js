@@ -12,6 +12,7 @@ import {
     AccountCircle as AccountCircleIcon,
 } from '@mui/icons-material';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import FoodBankIcon from '@mui/icons-material/FoodBank';
 
 import { Link } from 'react-router-dom';
 
@@ -19,6 +20,7 @@ const Menu = () => {
     const [selectedIndex, setSelectedIndex] = useState();
     const items = [
         { label: 'Usuários', icon: <AccountCircleIcon />, path: '/users' },
+        { label: 'Instituições', icon: <FoodBankIcon />, path: '/institutions' },
         { label: 'Sair', icon: <MeetingRoomIcon />, path: '/logout' },
     ];
     return (

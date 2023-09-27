@@ -34,6 +34,10 @@ function Login() {
 
   const navigate = useNavigate();
 
+  const handleCriarContaClick = () => {
+    navigate("/users/newUser");
+  };
+
   async function handleLogin(e) {
     e.preventDefault();
     if (!username || !password) {
@@ -125,6 +129,17 @@ function Login() {
                     onChange={() => setAutorized(true)}
                     onExpired={() => setAutorized(false)}
                   />
+                </Grid>
+                <Grid item md={12} sm={12} xs={12}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    fullWidth
+                    style={{ backgroundColor: 'gray' }}
+                    onClick={handleCriarContaClick}
+                  >
+                    Criar conta
+                  </Button>
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
                   <Button

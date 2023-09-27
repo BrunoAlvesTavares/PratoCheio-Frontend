@@ -7,7 +7,7 @@ import validator from 'validator';
 
 const UserForm = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({ name: '', username: '', accessLevel: '', password: '' });
+  const [user, setUser] = useState({ name: '', username: '', accessLevel: 'user', password: '', phone: '' });
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -120,6 +120,17 @@ const UserForm = () => {
       </Grid>
       <Grid item md={6} sm={12} xs={12}>
         <TextField
+          name="phone"
+          label="Número"
+          variant="outlined"
+          size="small"
+          margin="normal"
+          value={user.phone}
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid item md={6} sm={12} xs={12}>
+        <TextField
           name="password"
           label="Senha"
           variant="outlined"
@@ -139,6 +150,7 @@ const UserForm = () => {
             label="Nível de acesso"
           >
             <MenuItem value="admin">Administrador</MenuItem>
+            <MenuItem value="manager">Administrador da instituição</MenuItem>
             <MenuItem value="user">Usuário</MenuItem>
           </Select>
         </FormControl>
