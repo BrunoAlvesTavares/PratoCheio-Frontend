@@ -13,16 +13,21 @@ import {
 } from '@mui/icons-material';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
+import { getCurrentUser } from '../../utils/auth';
 
 import { Link } from 'react-router-dom';
 
 const Menu = () => {
     const [selectedIndex, setSelectedIndex] = useState();
+    const currentUser = getCurrentUser();
     const items = [
-        { label: 'Usuários', icon: <AccountCircleIcon />, path: '/users' },
         { label: 'Instituições', icon: <FoodBankIcon />, path: '/institutions' },
         { label: 'Sair', icon: <MeetingRoomIcon />, path: '/logout' },
     ];
+
+    if (currentUser && currentUser.accessLevel === 'admin') {
+        items.unshift({ label: 'Usuários', icon: <AccountCircleIcon />, path: '/users', accessLevel: 'admin' });
+    }
     return (
         <>
             <Drawer

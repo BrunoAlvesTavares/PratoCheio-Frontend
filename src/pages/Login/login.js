@@ -51,7 +51,7 @@ function Login() {
         try {
           const apiResponse = await api.post('/login', { username, password });
           login(apiResponse.data.access_token, apiResponse.data.currentUser);
-          navigate('/users');
+          navigate('/institutions');
         } catch (err) {
           setPassword("");
           setUsername("");
@@ -130,7 +130,7 @@ function Login() {
                     onExpired={() => setAutorized(false)}
                   />
                 </Grid>
-                <Grid item md={12} sm={12} xs={12}>
+                {/* <Grid item md={12} sm={12} xs={12}>
                   <Button
                     variant="contained"
                     color="secondary"
@@ -140,7 +140,7 @@ function Login() {
                   >
                     Criar conta
                   </Button>
-                </Grid>
+                </Grid> */}
                 <Grid item md={12} sm={12} xs={12}>
                   <Button
                     variant="contained"
