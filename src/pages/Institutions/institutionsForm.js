@@ -4,9 +4,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Toast } from '../../components/swal';
 import UserCombo from '../../components/Combos/UsersCombo';
 import api from '../../utils/api';
+import { getCurrentUser } from '../../utils/auth';
 
 const InstitutionsForm = () => {
   const navigate = useNavigate();
+  const currentUser = getCurrentUser();
   const [institutions, setInstitutions] = useState({
     name: '',
     location: '',
@@ -83,7 +85,7 @@ const InstitutionsForm = () => {
     }
   };
 
-   const handleUserChanged = (selectedUsers) => {
+  const handleUserChanged = (selectedUsers) => {
     const userId = selectedUsers.length > 0 ? selectedUsers[0].id : '';
     setInstitutions((prevState) => ({
       ...prevState,
@@ -163,9 +165,11 @@ const InstitutionsForm = () => {
           onChange={handleChange}
         />
       </Grid>
+      {currentUser.accessLevel === 'admin' && (
         <Grid item md={12} sm={6} xs={6}>
           <UserCombo value={institutions.UserInstituition} onUserChanged={(value) => setInstitutions({ ...institutions, UserInstituition: value })} />
         </Grid>
+      )}
       <Button variant="contained" color="primary" type="submit" disabled={loading} style={{ marginTop: '1rem' }}>
         {loading ? 'Loading...' : 'Salvar'}
       </Button>

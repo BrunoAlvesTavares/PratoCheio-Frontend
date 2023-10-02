@@ -7,7 +7,7 @@ import validator from 'validator';
 
 const UserForm = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({ name: '', username: '', accessLevel: 'user', password: '', phone: '' });
+  const [user, setUser] = useState({ name: '', username: '', accessLevel: 'manager', password: '', phone: '' });
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -151,7 +151,6 @@ const UserForm = () => {
           >
             <MenuItem value="admin">Administrador</MenuItem>
             <MenuItem value="manager">Administrador da instituição</MenuItem>
-            <MenuItem value="user">Usuário</MenuItem>
           </Select>
         </FormControl>
       </Grid>
