@@ -116,6 +116,15 @@ export function InstitutionsList() {
               filterType: 'textField',
             },
           },
+            {
+            name: 'pix',
+            label: 'Chave pix',
+            options: {
+              filter: true,
+              sort: true,
+              filterType: 'textField',
+            },
+          },
         ];
 
         if (currentUser.accessLevel === 'admin' || currentUser.accessLevel === 'manager') {
@@ -166,7 +175,7 @@ export function InstitutionsList() {
         title="Lista de Instituições"
       />
       {currentUser.accessLevel === 'admin' && (
-        <PopperButton>
+        <PopperButton url="/institutions" >
           <FloatButton url="/institutions" />
         </PopperButton>
       )}

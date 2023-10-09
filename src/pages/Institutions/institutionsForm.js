@@ -16,6 +16,7 @@ const InstitutionsForm = () => {
     establishedYear: '',
     contactEmail: '',
     website: '',
+    pix: '',
     UserInstituition: null,
   });
   const { id } = useParams();
@@ -162,6 +163,17 @@ const InstitutionsForm = () => {
           size="small"
           margin="normal"
           value={institutions.website}
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid item md={6} sm={12} xs={12}>
+        <TextField
+          name="pix"
+          label="Chave pix"
+          variant="outlined"
+          size="small"
+          margin="normal"
+          value={institutions.pix}
           onChange={handleChange}
         />
       </Grid>
