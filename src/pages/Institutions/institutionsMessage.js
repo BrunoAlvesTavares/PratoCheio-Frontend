@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { TextField, Button, Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
+import ReactQuill from 'react-quill';  // Importa o ReactQuill
+import 'react-quill/dist/quill.snow.css';  // Estilos do ReactQuill
 import { useNavigate } from 'react-router-dom';
 import { Toast } from '../../components/swal';
 import api from '../../utils/api';
@@ -9,8 +11,7 @@ const InstitutionsMessage = () => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (event) => {
-    const { value } = event.target;
+  const handleChange = (value) => {
     setMessage(value);
   };
 
@@ -46,14 +47,10 @@ const InstitutionsMessage = () => {
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Grid item md={6} sm={12} xs={12}>
-        <TextField
-          name="message"
-          label="Mensagem"
-          variant="outlined"
-          size="small"
-          margin="normal"
+        <ReactQuill
           value={message}
           onChange={handleChange}
+          placeholder="Digite sua mensagem..."
         />
       </Grid>
       <Button variant="contained" color="primary" type="submit" disabled={loading} style={{ marginTop: '1rem' }}>
