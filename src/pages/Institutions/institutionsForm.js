@@ -42,12 +42,57 @@ const InstitutionsForm = () => {
     const { name, value } = event.target;
     setInstitutions((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // Validations
+    if (institutions.name.trim() === '') {
+      Toast.fire({
+        icon: 'error',
+        title: 'Por favor, preencha o campo Nome.',
+      });
+      return;
+    }
+
+    const establishedYear = parseInt(institutions.establishedYear, 10);
+    if (isNaN(establishedYear) || establishedYear < 0) {
+      Toast.fire({
+        icon: 'error',
+        title: 'Por favor, insira um ano de fundação válido.',
+      });
+      return;
+    }
+
+    const emailPattern = /^\S+@\S+\.\S+$/;
+    if (!emailPattern.test(institutions.contactEmail)) {
+      Toast.fire({
+        icon: 'error',
+        title: 'Por favor, insira um email de contato válido.',
+      });
+      return;
+    }
+
+    const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([/\w\.-]*)*\/?$/;
+    if (!urlPattern.test(institutions.website)) {
+      Toast.fire({
+        icon: 'error',
+        title: 'Por favor, insira uma URL de website válida.',
+      });
+      return;
+    }
+
+    if (institutions.pix.trim() === '') {
+      Toast.fire({
+        icon: 'error',
+        title: 'Por favor, preencha o campo Chave PIX.',
+      });
+      return;
+    }
+
     setLoading(true);
     if (id) {
       api
@@ -55,7 +100,7 @@ const InstitutionsForm = () => {
         .then(() => {
           Toast.fire({
             icon: 'success',
-            title: 'Instituição salva com sucesso!'
+            title: 'Instituição salva com sucesso!',
           }).then(() => {
             navigate('/institutions');
           });
@@ -63,7 +108,7 @@ const InstitutionsForm = () => {
         .catch((err) => {
           Toast.fire({
             icon: 'error',
-            title: err.response.data.message
+            title: err.response.data.message,
           });
         });
     } else {
@@ -72,7 +117,7 @@ const InstitutionsForm = () => {
         .then(() => {
           Toast.fire({
             icon: 'success',
-            title: 'Instituição salva com sucesso!'
+            title: 'Instituição salva com sucesso!',
           }).then(() => {
             navigate('/institutions');
           });
@@ -80,7 +125,7 @@ const InstitutionsForm = () => {
         .catch((err) => {
           Toast.fire({
             icon: 'error',
-            title: err.response.data.message
+            title: err.response.data.message,
           });
         });
     }
@@ -90,7 +135,7 @@ const InstitutionsForm = () => {
     const userId = selectedUsers.length > 0 ? selectedUsers[0].id : '';
     setInstitutions((prevState) => ({
       ...prevState,
-      userId
+      userId,
     }));
   };
 
@@ -169,7 +214,7 @@ const InstitutionsForm = () => {
       <Grid item md={6} sm={12} xs={12}>
         <TextField
           name="pix"
-          label="Chave pix"
+          label="Chave PIX"
           variant="outlined"
           size="small"
           margin="normal"
