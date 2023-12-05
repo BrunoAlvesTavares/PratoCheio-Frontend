@@ -9,6 +9,7 @@ import { InstitutionsList } from './pages/Institutions/institutionsList';
 import InstitutionsForm from './pages/Institutions/institutionsForm';
 import InstitutionsMessage from './pages/Institutions/institutionsMessage';
 import UserCreatedForm from './pages/Users/userCreated';
+import Home from './pages/home/home';
 
 const Layout = () => {
   return (
@@ -16,6 +17,7 @@ const Layout = () => {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/home" element={<HomeMenu />} />
         <Route path="/users" element={<UsersList />} />
         <Route path="/users/new" element={<FormUserMenu />} />
         <Route path="/users/newUser" element={<UserCreatedForm />} />
@@ -52,6 +54,15 @@ const FormMessageMenu = () => {
     <>
       <Menu />
       <InstitutionsMessage />
+    </>
+  );
+};
+
+const HomeMenu = () => {
+  return (
+    <>
+      <Menu />
+      <Home />
     </>
   );
 };

@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
-import { Button, Grid, TextField } from '@mui/material'; // Importa o TextField do Material-UI
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Button, Grid, TextField } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Toast } from '../../components/swal';
 import api from '../../utils/api';
 
 const InstitutionsMessage = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [institutionName, setInstitutionName] = useState('');
+
+  useEffect(() => {
+    // Fetch institution details by ID
+    api.get(`/institutions/${id}`)
+      .then((response) => {
+        setInstitutionName(response.data.name);
+      })
+      .catch((error) => {
+        console.error('Erro instituição não encontrada', error);
+      });
+  }, [id]);
 
   const handleChange = (event) => {
     setMessage(event.target.value);
@@ -16,7 +29,7 @@ const InstitutionsMessage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
-    const messageData = { message };
+    const messageData = { message, institutionName };
     api
       .post('/whatsapp/sendMessage', messageData)
       .then(() => {

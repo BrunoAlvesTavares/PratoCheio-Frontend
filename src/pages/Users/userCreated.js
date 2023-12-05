@@ -13,7 +13,7 @@ const UserCreatedForm = () => {
     const [phoneError, setPhoneError] = useState(false);
 
     const validatePhoneNumber = (value) => {
-        const phoneNumberPattern = /^\d{10}$/;
+        const phoneNumberPattern = /^\d{12}$/;
         return phoneNumberPattern.test(value);
     };
 
@@ -107,7 +107,7 @@ const UserCreatedForm = () => {
                     value={user.phone}
                     onChange={handleChange}
                     error={phoneError}
-                    helperText={phoneError && 'Informe um número de celular válido (ex: 5587180247) sem o número 9 na frente'}
+                    helperText={phoneError && 'Informe um número de celular válido (ex: 555587180247) sem o número 9 na frente'}
                 />
             </Grid>
             <Grid item md={6} sm={12} xs={12}>

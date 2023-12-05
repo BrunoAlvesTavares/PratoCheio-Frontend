@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import ExpandableTable from '../../components/ExpandableTable/ExpandableTable';
 import PopperButton from '../../components/PopperButton/index';
 import FloatButton from '../../components/FloatButton/index';
-import OperationDropdown from '../../components/operationDropdown';
 import { getCurrentUser } from '../../utils/auth';
 import api from '../../utils/api';
 
@@ -59,7 +58,6 @@ export function InstitutionsList() {
   useEffect(() => {
     api.get('/institutions')
       .then(response => {
-        console.log(currentUser);
         setInstitutionsData(response.data);
         const newColumns = [
           {
@@ -118,7 +116,7 @@ export function InstitutionsList() {
           },
             {
             name: 'pix',
-            label: 'Chave pix',
+            label: 'Chave Pix',
             options: {
               filter: true,
               sort: true,
@@ -130,29 +128,69 @@ export function InstitutionsList() {
         if (currentUser.accessLevel === 'admin' || currentUser.accessLevel === 'manager') {
           newColumns.push({
             name: '_id',
-            label: 'Operações',
+            label: 'Editar',
             options: {
               filter: false,
               sort: false,
               customBodyRenderLite: (dataIndex) => {
                 const url = `/institutions/${response.data[dataIndex]._id}/edit`;
-                const urlMessage = `/institutions/${response.data[dataIndex]._id}/message`
-                const items = [
-                  {
-                    label: 'Editar Instituição',
-                    onclick: () => navigate(url),
-                  },
-                  {
-                    label: 'Enviar Pedido',
-                    onclick: () => navigate(urlMessage),
-                  },
-                ];
-                return <OperationDropdown items={items} />;
+                return (
+                  <button
+                    onClick={() => navigate(url)}
+                    style={{
+                      backgroundColor: '#2196F3',
+                      border: 'none',
+                      color: 'white',
+                      padding: '10px 20px',
+                      textAlign: 'center',
+                      textDecoration: 'none',
+                      display: 'inline-block',
+                      fontSize: '16px',
+                      margin: '4px 2px',
+                      cursor: 'pointer',
+                      borderRadius: '4px',
+                    }}
+                  >
+                    Editar
+                  </button>
+                );
               },
             },
           });
         }
-
+        if (currentUser.accessLevel === 'admin' || currentUser.accessLevel === 'manager') {
+        newColumns.push({
+          name: '_id',
+          label: 'Enviar Mensagem',
+          options: {
+            filter: false,
+            sort: false,
+            customBodyRenderLite: (dataIndex) => {
+              const urlMessage = `/institutions/${response.data[dataIndex]._id}/message`;
+              return (
+                <button
+                  onClick={() => navigate(urlMessage)}
+                  style={{
+                    backgroundColor: '#4CAF50',
+                    border: 'none',
+                    color: 'white',
+                    padding: '10px 20px',
+                    textAlign: 'center',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                    fontSize: '16px',
+                    margin: '4px 2px',
+                    cursor: 'pointer',
+                    borderRadius: '4px',
+                  }}
+                >
+                  Enviar Mensagem
+                </button>
+              );
+            },
+          },
+        });
+      }
         setColumns(newColumns);
       })
       .catch(error => {
