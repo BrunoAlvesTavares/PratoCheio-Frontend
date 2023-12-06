@@ -15,7 +15,9 @@ import {
   ArrowBack as ArrowBackIcon,
 } from '@mui/icons-material';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import HistoryIcon from '@mui/icons-material/History';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
+import HomeIcon from '@mui/icons-material/Home';
 import { getCurrentUser } from '../../utils/auth';
 
 import { Link } from 'react-router-dom';
@@ -30,16 +32,18 @@ const Menu = () => {
   };
 
   let items = [
-    { label: 'Página inicial', icon: <MeetingRoomIcon />, path: '/home' },
+    { label: 'Página inicial', icon: <HomeIcon />, path: '/home' },
     { label: 'Sair', icon: <MeetingRoomIcon />, path: '/logout' },
   ];
 
   if (currentUser && currentUser.accessLevel === 'admin') {
+    items.unshift({ label: 'Histórico de mensagens', icon: <HistoryIcon />, path: '/messagehistory' });
     items.unshift({ label: 'Instituições', icon: <FoodBankIcon />, path: '/institutions' });
     items.unshift({ label: 'Usuários', icon: <AccountCircleIcon />, path: '/users', accessLevel: 'admin' });
   }
 
   if (currentUser && currentUser.accessLevel === 'manager') {
+    items.unshift({ label: 'Histórico de mensagens', icon: <HistoryIcon />, path: '/messagehistory' });
     items.unshift({ label: 'Minha instituição', icon: <FoodBankIcon />, path: '/institutions' });
   }
 

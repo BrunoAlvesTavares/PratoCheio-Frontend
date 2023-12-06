@@ -9,6 +9,7 @@ import { InstitutionsList } from './pages/Institutions/institutionsList';
 import InstitutionsForm from './pages/Institutions/institutionsForm';
 import InstitutionsMessage from './pages/Institutions/institutionsMessage';
 import UserCreatedForm from './pages/Users/userCreated';
+import MessageHistoryList from './pages/messageHistory/index'
 import Home from './pages/home/home';
 
 const Layout = () => {
@@ -19,6 +20,7 @@ const Layout = () => {
         <Route path="/logout" element={<Logout />} />
         <Route path="/home" element={<HomeMenu />} />
         <Route path="/users" element={<UsersList />} />
+        <Route path="/messagehistory" element={<MessageHistoryList />} />
         <Route path="/users/new" element={<FormUserMenu />} />
         <Route path="/users/newUser" element={<UserCreatedForm />} />
         <Route path="/users/:id/edit" element={<FormUserMenu />} />

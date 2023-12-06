@@ -51,7 +51,7 @@ function Login() {
         try {
           const apiResponse = await api.post('/login', { username, password });
           login(apiResponse.data.access_token, apiResponse.data.currentUser);
-          navigate('/institutions');
+          navigate('/home');
         } catch (err) {
           setPassword("");
           setUsername("");
